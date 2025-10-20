@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício Prático - WhatsApp Business</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <img src="imagem/logo ifs.png" alt="Logo" class="logo">
+        <h1>Exercício Prático: Montando sua Estratégia no WhatsApp Business</h1>
+        <p class="subtitle">Preencha os campos abaixo para planejar seu perfil. Ao final, clique em "Enviar Respostas" para mandar seu exercício ao instrutor.</p>
+    </header>
+
+    <form action="https://formsubmit.co/stephany.tucunduva@aluno.ifsp.edu.br" method="POST">
+        
+        <input type="hidden" name="_next" value="obrigado.html">
+        <input type="hidden" name="_subject" value="Novo Exercício de WhatsApp Business Recebido!">
+        <input type="hidden" name="_captcha" value="false"> 
+        
+        <div class="form-section">
+            <h2>Parte 1: A Vitrine do seu Negócio (Seu Perfil)</h2>
+            <label for="nome-comercial">1. Nome Comercial (Claro e fácil de lembrar):</label>
+            <input type="text" id="nome-comercial" name="1_Nome_Comercial" placeholder="Ex: Horta do Zé, Geleias da Lúcia" required>
+            <label for="descricao-curta">2. Descrição Curta (Quem é você, o que vende e seu diferencial):</label>
+            <textarea id="descricao-curta" name="2_Descricao_Curta" rows="4" placeholder="Ex: Verduras orgânicas colhidas na hora..." required></textarea>
+        </div>
+
+        <div class="form-section">
+            <h2>Parte 2: Agilizando a Conversa (Mensagens Automáticas)</h2>
+            <label for="msg-saudacao">1. Mensagem de Saudação (Para o primeiro contato do cliente):</label>
+            <textarea id="msg-saudacao" name="3_Mensagem_Saudacao" rows="4" placeholder="Ex: Olá! Agradecemos seu contato..." required></textarea>
+            <label for="resp-rapida-1">2. Resposta Rápida 1 (Atalho: /pagamento)</label>
+            <textarea id="resp-rapida-1" name="4_Resposta_Pagamento" rows="3" placeholder="Ex: Claro! Nosso PIX é o celular..." required></textarea>
+            <label for="resp-rapida-2">3. Resposta Rápida 2 (Atalho: /entrega)</label>
+            <textarea id="resp-rapida-2" name="5_Resposta_Entrega" rows="3" placeholder="Ex: Nossas entregas são feitas às sextas..." required></textarea>
+        </div>
+
+        <div class="form-section">
+            <h2>Parte 3: Planejando seu Conteúdo (O que postar no Status)</h2>
+            <label for="ideia-segunda">1. Ideia para Segunda-feira (Começo da semana):</label>
+            <input type="text" id="ideia-segunda" name="6_Ideia_Segunda" placeholder="Ex: Vídeo mostrando o plantio de novas mudas." required>
+            <label for="ideia-quarta">2. Ideia para Quarta-feira (Meio da semana):</label>
+            <input type="text" id="ideia-quarta" name="7_Ideia_Quarta" placeholder="Ex: PROMOÇÃO DO DIA: Doce de leite fresquinho..." required>
+        </div>
+        
+        <div class="form-section aluno-info">
+            <h2>Seus Dados</h2>
+            <label for="aluno-nome">Seu Nome Completo:</label>
+            <input type="text" id="aluno-nome" name="Nome_do_Aluno" placeholder="Digite seu nome aqui" required>
+            <label for="aluno-contato">Seu Contato:</label>
+            <input type="text" id="aluno-contato" name="Contato_do_Aluno" placeholder="(11) 11111-1111" required>
+        </div>
+
+        <button type="submit">Enviar Respostas</button>
+    </form>
+</div>
+</body>
+</html>
