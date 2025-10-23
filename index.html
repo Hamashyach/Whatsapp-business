@@ -1,115 +1,135 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercício Prático - WhatsApp Business</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
- <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Exercício Prático - WhatsApp Business</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    (function(){
-      emailjs.init("urNi3uOypg6ka6D54"); 
+    (function() {
+      // Inicialize com sua Public Key (user/public key)
+      emailjs.init("urNi3uOypg6ka6D54"); // <- confirme se é essa mesmo
     })();
 
     function enviarFormulario(event) {
       event.preventDefault();
+      const form = event.target;
+      const btn = form.querySelector('button[type="submit"]');
 
-      emailjs.sendForm('service_p5t58rw', 'template_m34e0dg', event.target)
-        .then(function() {
-          alert('✅ Formulário enviado com sucesso!');
-          event.target.reset();
+      // desativa botão e mostra texto
+      btn.disabled = true;
+      const originalText = btn.innerText;
+      btn.innerText = "Enviando...";
+
+      // envia usando EmailJS (service ID e template ID)
+      emailjs.sendForm('service_p5t58rw', 'template_m34e0dg', form)
+        .then(function(response) {
+          // sucesso: redireciona para obrigado
+          // se preferir, mostrar modal ou mensagem estilizada em vez de redirecionar
+          window.location.href = "https://whatsapp-business-tau.vercel.app/obrigado.html";
         }, function(error) {
-          alert('❌ Erro ao enviar: ' + JSON.stringify(error));
+          // erro: reabilita botão e mostra alerta amigável
+          btn.disabled = false;
+          btn.innerText = originalText;
+          console.error("EmailJS error:", error);
+          alert("Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente. Se o problema persistir, veja o console do navegador.");
         });
     }
   </script>
+</head>
 <body>
-<div class="container">
+  <div class="container">
     <header>
-        <img src="imagem/logo ifs.png" alt="Logo" class="logo">
-        <h1>Exercício Prático: Estratégia de Negócio com WhatsApp Business</h1>
-        <p class="subtitle">
-            Preencha os campos abaixo para montar sua estratégia digital. Ao final, clique em <strong>"Enviar Respostas"</strong> para enviar seu exercício ao instrutor.
-        </p>
+      <img src="imagem/logo ifs.png" alt="Logo" class="logo" style="max-width:120px;">
+      <h1>Exercício Prático: Estratégia de Negócio com WhatsApp Business</h1>
+      <p class="subtitle">
+        Preencha os campos abaixo para montar sua estratégia digital. Ao final, clique em <strong>"Enviar Respostas"</strong>.
+      </p>
     </header>
 
-    <form action="https://formsubmit.co/stephany.tucunduva@aluno.ifsp.edu.br" method="POST">
-        <input type="hidden" name="_next" value="https://whatsapp-business-tau.vercel.app/obrigado.html">
-        <input type="hidden" name="_subject" value="Novo Exercício de WhatsApp Business Recebido!">
-        <input type="hidden" name="_captcha" value="false">
+    <!-- OBS: remova action e method para evitar envio por FormSubmit -->
+    <form onsubmit="enviarFormulario(event)">
 
-        <!-- Parte 1 -->
-        <div class="form-section">
-            <h2>Parte 1: A Vitrine do Seu Negócio (Perfil Comercial)</h2>
-            <label for="nome-comercial">1. Nome Comercial (claro e fácil de lembrar):</label>
-            <input type="text" id="nome-comercial" name="1_Nome_Comercial" placeholder="Ex: Horta da Serra, Geleias da Lúcia" required>
+      <!-- Parte 1 -->
+      <div class="form-section">
+        <h2>Parte 1: A Vitrine do Seu Negócio (Perfil Comercial)</h2>
 
-            <label for="descricao-curta">2. Descrição Curta (quem é você, o que vende e seu diferencial):</label>
-            <textarea id="descricao-curta" name="2_Descricao_Curta" rows="4" placeholder="Ex: Verduras orgânicas colhidas na hora, entregues toda sexta-feira..." required></textarea>
+        <!-- Alterei nomes para não começarem com número (recomendo isso) -->
+        <label for="nome-comercial">1. Nome Comercial (claro e fácil de lembrar):</label>
+        <input type="text" id="nome-comercial" name="nome_comercial" placeholder="Ex: Horta da Serra, Geleias da Lúcia" required>
 
-            <label for="categoria">3. Categoria do Negócio:</label>
-            <input type="text" id="categoria" name="3_Categoria" placeholder="Ex: Agricultura, Produtos Artesanais, Panificação" required>
+        <label for="descricao-curta">2. Descrição Curta (quem é você, o que vende e seu diferencial):</label>
+        <textarea id="descricao-curta" name="descricao_curta" rows="4" placeholder="Ex: Verduras orgânicas colhidas na hora, entregues toda sexta-feira..." required></textarea>
 
-            <label for="horario">4. Horário de Atendimento:</label>
-            <input type="text" id="horario" name="4_Horario" placeholder="Ex: Segunda a sexta, das 8h às 17h">
-        </div>
+        <label for="categoria">3. Categoria do Negócio:</label>
+        <input type="text" id="categoria" name="categoria" placeholder="Ex: Agricultura, Produtos Artesanais, Panificação" required>
 
-        <!-- Parte 2 -->
-        <div class="form-section">
-            <h2>Parte 2: Comunicação com o Cliente (Mensagens e Atendimento)</h2>
+        <label for="horario">4. Horário de Atendimento:</label>
+        <input type="text" id="horario" name="horario" placeholder="Ex: Segunda a sexta, das 8h às 17h">
+      </div>
 
-            <label for="msg-saudacao">1. Mensagem de Saudação (primeiro contato do cliente):</label>
-            <textarea id="msg-saudacao" name="5_Mensagem_Saudacao" rows="3" placeholder="Ex: Olá! Agradecemos seu contato. Como podemos te ajudar hoje?" required></textarea>
+      <!-- Parte 2 -->
+      <div class="form-section">
+        <h2>Parte 2: Comunicação com o Cliente (Mensagens e Atendimento)</h2>
 
-            <label for="msg-ausencia">2. Mensagem de Ausência (fora do horário de atendimento):</label>
-            <textarea id="msg-ausencia" name="6_Mensagem_Ausencia" rows="3" placeholder="Ex: No momento estamos fora do horário, mas retornaremos assim que possível."></textarea>
+        <label for="msg-saudacao">1. Mensagem de Saudação (primeiro contato do cliente):</label>
+        <textarea id="msg-saudacao" name="mensagem_saudacao" rows="3" placeholder="Ex: Olá! Agradecemos seu contato. Como podemos ajudar?" required></textarea>
 
-            <label for="resp-rapida-1">3. Resposta Rápida 1 (Atalho: /pagamento)</label>
-            <textarea id="resp-rapida-1" name="7_Resposta_Pagamento" rows="3" placeholder="Ex: Aceitamos PIX, transferência bancária e pagamento na entrega." required></textarea>
+        <label for="msg-ausencia">2. Mensagem de Ausência (fora do horário de atendimento):</label>
+        <textarea id="msg-ausencia" name="mensagem_ausencia" rows="3" placeholder="Ex: No momento estamos fora do horário, mas retornaremos assim que possível."></textarea>
 
-            <label for="resp-rapida-2">4. Resposta Rápida 2 (Atalho: /entrega)</label>
-            <textarea id="resp-rapida-2" name="8_Resposta_Entrega" rows="3" placeholder="Ex: Fazemos entregas toda sexta-feira, das 8h às 12h." required></textarea>
+        <label for="resp-rapida-1">3. Resposta Rápida 1 (Atalho: /pagamento)</label>
+        <textarea id="resp-rapida-1" name="resposta_pagamento" rows="3" placeholder="Ex: Aceitamos PIX, transferência bancária e pagamento na entrega." required></textarea>
 
-            <label for="etiquetas">5. Etiquetas que você pretende usar (ex: novo pedido, cliente fiel, pagamento pendente):</label>
-            <input type="text" id="etiquetas" name="9_Etiquetas" placeholder="Ex: novo pedido, aguardando pagamento, entregue">
-        </div>
+        <label for="resp-rapida-2">4. Resposta Rápida 2 (Atalho: /entrega)</label>
+        <textarea id="resp-rapida-2" name="resposta_entrega" rows="3" placeholder="Ex: Fazemos entregas toda sexta-feira, das 8h às 12h." required></textarea>
 
-        <!-- Parte 3 -->
-        <div class="form-section">
-            <h2>Parte 3: Catálogo e Apresentação dos Produtos</h2>
+        <label for="etiquetas">5. Etiquetas que você pretende usar:</label>
+        <input type="text" id="etiquetas" name="etiquetas" placeholder="Ex: novo pedido, aguardando pagamento, entregue">
+      </div>
 
-            <label for="produto-exemplo">2. Dê um exemplo de produto com nome, preço e descrição:</label>
-            <textarea id="produto-exemplo" name="11_Exemplo_Produto" rows="3" placeholder="Ex: Cesta Verde - R$ 25,00 (alface, couve, cheiro-verde, rúcula)"></textarea>
+      <!-- Parte 3 -->
+      <div class="form-section">
+        <h2>Parte 3: Catálogo e Apresentação dos Produtos</h2>
 
-            <label for="link">3. Você possui link para vendas, catálogo digital ou rede social?</label>
-            <input type="text" id="link" name="12_Link" placeholder="Ex: https://instagram.com/hortadaserra ou linktr.ee/hortadaserra">
-        </div>
+        <label for="produto-exemplo">Exemplo de produto (nome, preço, descrição):</label>
+        <textarea id="produto-exemplo" name="exemplo_produto" rows="3" placeholder="Ex: Cesta Verde - R$ 25,00 (alface, couve, cheiro-verde, rúcula)"></textarea>
 
-        <!-- Parte 4 -->
-        <div class="form-section">
-            <h2>Parte 4: Estratégia e Planejamento</h2>
-            <label for="publico">1. Público-alvo do seu negócio:</label>
-            <textarea id="publico" name="13_Publico_Alvo" rows="2" placeholder="Ex: moradores do bairro, feirantes, consumidores de produtos naturais."></textarea>
+        <label for="link">Link para vendas / catálogo / redes sociais:</label>
+        <input type="text" id="link" name="link_vendas" placeholder="Ex: https://instagram.com/hortadaserra">
+      </div>
 
-            <label for="metas">2. Metas semanais ou mensais (ex: número de pedidos, novos clientes, etc.):</label>
-            <textarea id="metas" name="14_Metas" rows="2" placeholder="Ex: vender 10 cestas por semana, conquistar 5 novos clientes por mês."></textarea>
+      <!-- Parte 4 -->
+      <div class="form-section">
+        <h2>Parte 4: Estratégia e Planejamento</h2>
 
-            <label for="status">3. Ideias de conteúdo para postar nos Status:</label>
-            <textarea id="status" name="15_Ideias_Status" rows="4" placeholder="Ex: Mostrar a colheita do dia, promoções da semana, receitas com seus produtos."></textarea>
-        </div>
+        <label for="publico">Público-alvo do seu negócio:</label>
+        <textarea id="publico" name="publico_alvo" rows="2" placeholder="Ex: moradores do bairro, feirantes, consumidores de produtos naturais."></textarea>
 
-        <!-- Parte final -->
-        <div class="form-section aluno-info">
-            <h2>Identificação do Participante</h2>
-            <label for="aluno-nome">Seu Nome Completo:</label>
-            <input type="text" id="aluno-nome" name="17_Nome_do_Aluno" placeholder="Digite seu nome aqui" required>
+        <label for="metas">Metas semanais ou mensais (ex: número de pedidos):</label>
+        <textarea id="metas" name="metas" rows="2" placeholder="Ex: vender 10 cestas por semana"></textarea>
 
-            <label for="aluno-contato">Seu Contato (WhatsApp):</label>
-            <input type="text" id="aluno-contato" name="18_Contato_do_Aluno" placeholder="(11) 11111-1111" required>
+        <label for="status">Ideias de conteúdo para postar nos Status:</label>
+        <textarea id="status" name="ideias_status" rows="4" placeholder="Ex: Mostrar a colheita do dia, promoções da semana, receitas."></textarea>
+      </div>
 
-        <button type="submit">Enviar Respostas</button>
+      <!-- Identificação -->
+      <div class="form-section aluno-info">
+        <h2>Identificação do Participante</h2>
+
+        <label for="aluno-nome">Seu Nome Completo:</label>
+        <input type="text" id="aluno-nome" name="nome_aluno" placeholder="Digite seu nome aqui" required>
+
+        <label for="aluno-contato">Seu Contato (WhatsApp):</label>
+        <input type="text" id="aluno-contato" name="contato_aluno" placeholder="(11) 11111-1111" required>
+      </div>
+
+      <button type="submit">Enviar Respostas</button>
     </form>
-</div>
+  </div>
 </body>
 </html>
